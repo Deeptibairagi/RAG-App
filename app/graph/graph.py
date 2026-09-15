@@ -32,78 +32,45 @@ def build_graph():
     # Vector store
     # ========================================================
 
-    vectorstore = get_vectorstore(
-        embeddings
-    )
+    vectorstore = get_vectorstore(embeddings)
 
     # ========================================================
     # Retriever
     # ========================================================
 
-    retriever = get_retriever(
-        vectorstore
-    )
+    retriever = get_retriever(vectorstore)
 
     # ========================================================
     # State graph
     # ========================================================
 
-    graph_builder = StateGraph(
-        RAGState
-    )
+    graph_builder = StateGraph(RAGState)
 
     # ========================================================
     # Nodes
     # ========================================================
 
-    retrieve_documents_node = (
-        create_retrieve_documents_node(
-            retriever
-        )
-    )
+    retrieve_documents_node = (create_retrieve_documents_node(retriever))
 
-    graph_builder.add_node(
-        "retrieve_documents",
-        retrieve_documents_node,
-    )
+    graph_builder.add_node("retrieve_documents", retrieve_documents_node)
 
-    graph_builder.add_node(
-        "grade_documents",
-        grade_documents_node,
-    )
+    graph_builder.add_node("grade_documents", grade_documents_node)
 
-    graph_builder.add_node(
-        "rewrite_query",
-        rewrite_query,
-    )
+    graph_builder.add_node("rewrite_query", rewrite_query)
 
-    graph_builder.add_node(
-        "format_context",
-        format_context,
-    )
+    graph_builder.add_node("format_context", format_context)
 
-    graph_builder.add_node(
-        "create_prompt",
-        create_prompt,
-    )
+    graph_builder.add_node("create_prompt", create_prompt)
 
-    graph_builder.add_node(
-        "generate_answer",
-        generate_answer,
-    )
+    graph_builder.add_node("generate_answer", generate_answer)
 
-    graph_builder.add_node(
-        "no_relevant_documents",
-        no_relevant_documents,
-    )
+    graph_builder.add_node("no_relevant_documents", no_relevant_documents)
 
     # ========================================================
     # Edges
     # ========================================================
 
-    add_edges(
-        graph_builder
-    )
+    add_edges(graph_builder)
 
     # ========================================================
     # Compile
