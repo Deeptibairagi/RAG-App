@@ -1,0 +1,121 @@
+
+# # langchain
+# # langchain-classic
+# # langchain-core
+# # langchain_openai
+# # langchain-community
+# # langchain-text-splitters
+# # langchain-huggingface
+# # sentence-transformers
+# # langchain-qdrant
+# # qdrant-client
+# # python-dotenv
+
+# # langchain-ollama
+# # langgraph-checkpoint-sqlite
+# # langgraph
+
+# # pypdf
+# # unstructured[all-docs]
+
+
+# # pydantic
+# # fastapi
+# # uvicorn
+# # streamlit
+# # requests
+
+
+# fastapi
+# uvicorn[standard]
+# streamlit
+# requests
+# python-dotenv
+# pydantic
+
+# langchain
+# langchain-core
+# langchain-community
+# langchain-text-splitters
+# langchain-classic
+# langchain-ollama
+# langchain-huggingface
+# langchain-qdrant
+
+# qdrant-client
+# sentence-transformers
+# transformers
+# torch
+
+# pypdf
+# unstructured
+# python-docx
+
+# pandas
+# numpy
+
+
+# ============================================================
+# Web / API
+# ============================================================
+
+fastapi
+uvicorn[standard]
+streamlit
+requests
+python-dotenv
+pydantic
+
+
+# ============================================================
+# LangChain
+# ============================================================
+
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-classic
+langchain-openai
+langchain-huggingface
+langchain-qdrant
+
+
+# ============================================================
+# LangGraph
+# ============================================================
+
+langgraph
+
+
+# ============================================================
+# Qdrant
+# ============================================================
+
+qdrant-client
+
+
+# ============================================================
+# Embeddings / ML
+# ============================================================
+
+sentence-transformers
+transformers
+torch
+
+
+# ============================================================
+# Document processing
+# ============================================================
+
+pypdf
+unstructured
+python-docx
+
+
+# ============================================================
+# Data
+# ============================================================
+
+pandas
+numpy

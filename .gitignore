@@ -1,0 +1,164 @@
+# # Virtual environment
+# venv/
+# env/
+# .venv/
+
+# # Environment variables
+# .env
+
+# # Python cache
+# __pycache__/
+# *.py[cod]
+
+# # Streamlit
+# .streamlit/
+
+# # Database
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# # Vector databases / local data
+# chroma/
+# qdrant_storage/
+# faiss_index/
+
+# # Uploaded documents
+# data/
+# uploads/
+
+# # Logs
+# *.log
+# logs/
+
+# # IDE
+# .vscode/
+# .idea/
+
+# # OS
+# .DS_Store
+# Thumbs.db
+
+# # Python packaging
+# *.egg-info/
+# dist/
+# build/
+
+# # Jupyter
+# .ipynb_checkpoints/
+
+# # Secrets
+# *.pem
+# *.key
+# # Project virtual environment
+# myapp/
+
+
+
+
+# # ============================================================
+# # Python
+# # ============================================================
+
+# __pycache__/
+# *.py[cod]
+# *.pyo
+
+# .venv/
+# venv/
+# env/
+
+
+# # ============================================================
+# # Environment / secrets
+# # ============================================================
+
+# .env
+# .env.*
+# !.env.example
+
+# .streamlit/secrets.toml
+
+
+# # ============================================================
+# # Database
+# # ============================================================
+
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# data/*.db
+# data/*.sqlite
+# data/*.sqlite3
+
+
+# # ============================================================
+# # ML / cache
+# # ============================================================
+
+# .cache/
+# .cache/**
+# huggingface/
+# models/
+
+
+# # ============================================================
+# # IDE
+# # ============================================================
+
+# .vscode/
+# .idea/
+
+
+# # ============================================================
+# # OS
+# # ============================================================
+
+# .DS_Store
+# Thumbs.db
+
+
+# # ============================================================
+# # Logs
+# # ============================================================
+
+# *.log
+# logs/
+
+
+
+# Virtual environment
+myapp/
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# Streamlit
+.streamlit/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+myapp/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+*.db
+*.sqlite
+*.sqlite3
