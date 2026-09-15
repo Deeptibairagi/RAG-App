@@ -25,8 +25,11 @@ def build_graph():
 
      # Load embeddings only when graph is first used
 
+    print("STEP 1: Starting graph build") 
+
     embeddings = get_embeddings()
 
+    print("STEP 2: Embeddings loaded")
 
     # ========================================================
     # Vector store
@@ -34,17 +37,24 @@ def build_graph():
 
     vectorstore = get_vectorstore(embeddings)
 
+    print("STEP 3: Qdrant connected")
+
     # ========================================================
     # Retriever
     # ========================================================
 
     retriever = get_retriever(vectorstore)
 
+   
+    print("STEP 4: Retriever created")
+
     # ========================================================
     # State graph
     # ========================================================
 
     graph_builder = StateGraph(RAGState)
+
+    print("STEP 5: Graph compiled successfully")
 
     # ========================================================
     # Nodes

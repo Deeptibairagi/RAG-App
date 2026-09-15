@@ -22,81 +22,71 @@ router = APIRouter(
 
 def ask_question(request: AskQuestionRequest):
 
-    return AskQuestionResponse(
-        success=True,
-        answer=f"Backend received: {request.question}",
-    )
+    try:
 
-    # try:
-
-    #     # ----------------------------------------------------
-    #     # Import LangGraph only when a question is asked
-    #     # ----------------------------------------------------
+        # ----------------------------------------------------
+        # Import LangGraph only when a question is asked
+        # ----------------------------------------------------
     
-    #     from app.graph.graph import build_graph
+        from app.graph.graph import build_graph
 
-    #     # ----------------------------------------------------
-    #     # Build / retrieve compiled graph
-    #     # ----------------------------------------------------
+        # ----------------------------------------------------
+        # Build / retrieve compiled graph
+        # ----------------------------------------------------
         
-    #     graph = build_graph()
+        graph = build_graph()
 
-    #     # ----------------------------------------------------
-    #     # Convert history into dictionaries
-    #     # ----------------------------------------------------
+        # ----------------------------------------------------
+        # Convert history into dictionaries
+        # ----------------------------------------------------
 
-    #     history = [
-    #         {
-    #             "role": message.role,
-    #             "content": message.content,
-    #         }
-    #         for message in request.history
-    #     ]
+        history = [
+            {
+                "role": message.role,
+                "content": message.content,
+            }
+            for message in request.history
+        ]
 
-    #     # ----------------------------------------------------
-    #     # Initial LangGraph state
-    #     # ----------------------------------------------------
+        # ----------------------------------------------------
+        # Initial LangGraph state
+        # ----------------------------------------------------
 
-    #     initial_state = {
-    #         "query": request.question,
-    #         "history": history,
-    #         "retry_count": 0,
-    #     }
+        initial_state = {
+            "query": request.question,
+            "history": history,
+            "retry_count": 0,
+        }
 
-    #     # ----------------------------------------------------
-    #     # Execute RAG pipeline
-    #     # ----------------------------------------------------
+        # ----------------------------------------------------
+        # Execute RAG pipeline
+        # ----------------------------------------------------
 
-    #     result = graph.invoke(
-    #         initial_state
-    #     )
+        result = graph.invoke(initial_state)
 
-    #     # ----------------------------------------------------
-    #     # Get final answer
-    #     # ----------------------------------------------------
+        # ----------------------------------------------------
+        # Get final answer
+        # ----------------------------------------------------
 
-    #     answer = result.get(
-    #         "answer",
-    #         "",
-    #     )
+        answer = result.get("answer", "")
 
-    #     if not answer:
+        if not answer:
 
-    #         answer = (
-    #             "I could not generate an answer "
-    #             "from the available documents."
-    #         )
+            answer = (
+                "I could not generate an answer "
+                "from the available documents."
+            )
 
-    #     return AskQuestionResponse(
-    #         success=True,
-    #         answer=answer,
-    #     )
+        return AskQuestionResponse(
+            success=True,
+            answer=answer,
+        )
 
-    # except Exception as exc:
+    except Exception as exc:
 
-    #     return AskQuestionResponse(
-    #         success=False,
-    #         answer="",
-    #         error="Failed to process the question.",
-    #         details=str(exc),
-    #     )
+        return AskQuestionResponse(
+            success=False,
+            answer="",
+            error="Failed to process the question.",
+            details=str(exc),
+        )
