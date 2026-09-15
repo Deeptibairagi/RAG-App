@@ -1,9 +1,25 @@
 
 
-
+from functools import lru_cache
 from app.graph.state import RAGState
 from app.rag.retrieval.prompts import format_documents, rag_prompt
 from app.llm import get_llm
+
+
+# ============================================================
+# Cached LLM
+# ============================================================
+
+@lru_cache(maxsize=1)
+def get_cached_llm():
+    """
+    Load the LLM only once and reuse it.
+    This avoids repeatedly creating the LLM client/model.
+    """
+    print("Loading LLM...")
+    return get_llm()
+
+
 
 
 # ============================================================
@@ -111,7 +127,7 @@ def grade_documents_node(state: RAGState):
 
 def rewrite_query(state: RAGState):
 
-    llm = get_llm()
+    llm = get_cached_llm()
 
     retry_count = state.get(
         "retry_count",
@@ -258,7 +274,7 @@ def create_prompt(state: RAGState):
 
 def generate_answer(state: RAGState):
 
-    llm = get_llm()
+    llm = get_cached_llm()
 
     messages = state.get(
         "messages",

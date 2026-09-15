@@ -1,10 +1,36 @@
 
 
+from functools import lru_cache
+
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 from langchain_classic.retrievers import ContextualCompressionRetriever
 from langchain_classic.retrievers.document_compressors import CrossEncoderReranker
 from app.config import RERANKER_MODEL_NAME, TOP_K, TOP_n
 
+
+# ============================================================
+# Cached reranker model
+# ============================================================
+
+@lru_cache(maxsize=1)
+def get_reranker_model():
+
+    if not RERANKER_MODEL_NAME:
+        return None
+
+    print(
+        f"Loading reranker model: "
+        f"{RERANKER_MODEL_NAME}"
+    )
+
+    return HuggingFaceCrossEncoder(
+        model_name=RERANKER_MODEL_NAME
+    )
+
+
+# ============================================================
+# Retriever
+# ============================================================
 
 
 def get_retriever(vectorstore):
@@ -17,8 +43,19 @@ def get_retriever(vectorstore):
 
     
     # Step 2: Load cross-encoder reranker
-    reranker_model = HuggingFaceCrossEncoder(model_name=RERANKER_MODEL_NAME)
+    reranker_model = get_reranker_model()
     # print("Reranker loaded!")
+
+    # If no reranker is configured,
+    # use the Qdrant retriever directly.
+    if reranker_model is None:
+
+        print(
+            "Reranker disabled. "
+            "Using Qdrant retriever directly."
+        )
+
+        return base_retriever
 
 
 

@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from app.api.schemas import AskQuestionRequest, AskQuestionResponse
 
-from app.graph.graph import build_graph
+# from app.graph.graph import build_graph
 
 
 router = APIRouter(
@@ -26,9 +26,15 @@ def ask_question(
     try:
 
         # ----------------------------------------------------
+        # Import LangGraph only when a question is asked
+        # ----------------------------------------------------
+    
+        from app.graph.graph import build_graph
+
+        # ----------------------------------------------------
         # Build / retrieve compiled graph
         # ----------------------------------------------------
-
+        
         graph = build_graph()
 
         # ----------------------------------------------------

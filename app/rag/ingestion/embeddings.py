@@ -1,17 +1,17 @@
 
-from langchain_huggingface import HuggingFaceEmbeddings
-from app.config import EMBEDDING_MODEL 
+# from langchain_huggingface import HuggingFaceEmbeddings
+# from app.config import EMBEDDING_MODEL 
 
 
 
-def get_embeddings():
+# def get_embeddings():
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name= EMBEDDING_MODEL 
+#     embeddings = HuggingFaceEmbeddings(
+#         model_name= EMBEDDING_MODEL 
 
-    )
+#     )
 
-    return embeddings
+#     return embeddings
 
 # embeddings = get_embeddings()
 
@@ -25,4 +25,32 @@ def get_embeddings():
 
 
 
+from langchain_huggingface import HuggingFaceEmbeddings
+from app.config import EMBEDDING_MODEL
+
+_embeddings = None
+
+
+def get_embeddings():
+
+    global _embeddings
+
+    if _embeddings is None:
+
+        print(
+            f"Loading embedding model: "
+            f"{EMBEDDING_MODEL}"
+        )
+
+        _embeddings = HuggingFaceEmbeddings(
+            model_name=EMBEDDING_MODEL,
+            model_kwargs={
+                "device": "cpu",
+            },
+            encode_kwargs={
+                "normalize_embeddings": True,
+            },
+        )
+
+    return _embeddings
 

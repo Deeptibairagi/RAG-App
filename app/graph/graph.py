@@ -19,15 +19,21 @@ from app.rag.retrieval.vectorstore import get_vectorstore
 from app.rag.retrieval.retriever_reranking import get_retriever
 
 
+
 @lru_cache(maxsize=1)
 def build_graph():
+
+     # Load embeddings only when graph is first used
+
+    embeddings = get_embeddings()
+
 
     # ========================================================
     # Vector store
     # ========================================================
 
     vectorstore = get_vectorstore(
-        get_embeddings
+        embeddings
     )
 
     # ========================================================

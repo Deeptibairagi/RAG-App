@@ -8,7 +8,7 @@ def create_vectorstore(chunks, embeddings):
 
     vectorstore = QdrantVectorStore.from_documents(
         documents=chunks,
-        embedding=get_embeddings,
+        embedding=embeddings,
         url=QDRANT_URL,
         api_key=QDRANT_API_KEY,
         collection_name=QDRANT_COLLECTION_NAME,
