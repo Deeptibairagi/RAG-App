@@ -1,9 +1,10 @@
+
+
 from fastapi import APIRouter
 
 from app.api.schemas import AskQuestionRequest, AskQuestionResponse
 
-# from app.graph.graph import build_graph
-
+import traceback
 
 router = APIRouter(
     prefix="/api",
@@ -83,6 +84,11 @@ def ask_question(request: AskQuestionRequest):
         )
 
     except Exception as exc:
+
+        print("========== RAG ERROR ==========")
+        print(repr(exc))
+        traceback.print_exc()
+        print("================================")
 
         return AskQuestionResponse(
             success=False,
