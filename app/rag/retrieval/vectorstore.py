@@ -2,13 +2,13 @@
 from qdrant_client import QdrantClient
 from langchain_qdrant import QdrantVectorStore
 from app.config import QDRANT_API_KEY, QDRANT_URL, QDRANT_COLLECTION_NAME
-
+from app.rag.ingestion.embeddings import get_embeddings
 
 def create_vectorstore(chunks, embeddings):
 
     vectorstore = QdrantVectorStore.from_documents(
         documents=chunks,
-        embedding=embeddings,
+        embedding=get_embeddings,
         url=QDRANT_URL,
         api_key=QDRANT_API_KEY,
         collection_name=QDRANT_COLLECTION_NAME,

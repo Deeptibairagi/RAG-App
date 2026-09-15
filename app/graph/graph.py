@@ -14,7 +14,7 @@ from app.graph.nodes import (
 )
 from app.graph.edges import add_edges
 
-from app.rag.ingestion.embeddings import embeddings
+from app.rag.ingestion.embeddings import get_embeddings
 from app.rag.retrieval.vectorstore import get_vectorstore
 from app.rag.retrieval.retriever_reranking import get_retriever
 
@@ -27,7 +27,7 @@ def build_graph():
     # ========================================================
 
     vectorstore = get_vectorstore(
-        embeddings
+        get_embeddings
     )
 
     # ========================================================

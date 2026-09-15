@@ -1,6 +1,6 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from app.config import CHUNK_OVERLAP, CHUNK_SIZE
-# from app.rag.ingestion import load_documents
+
 
 
 def split_documents(documents):

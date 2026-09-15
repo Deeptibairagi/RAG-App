@@ -13,7 +13,7 @@ def get_embeddings():
 
     return embeddings
 
-embeddings = get_embeddings()
+# embeddings = get_embeddings()
 
 # print("Embedding model loaded successfully!")
 
