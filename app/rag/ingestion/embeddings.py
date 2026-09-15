@@ -37,10 +37,7 @@ def get_embeddings():
 
     if _embeddings is None:
 
-        print(
-            f"Loading embedding model: "
-            f"{EMBEDDING_MODEL}"
-        )
+        print(f"Loading embedding model: {EMBEDDING_MODEL}")
 
         _embeddings = HuggingFaceEmbeddings(
             model_name=EMBEDDING_MODEL,
