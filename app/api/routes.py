@@ -21,96 +21,25 @@ router = APIRouter(
     response_model=AskQuestionResponse,
 )
 
-# def ask_question(request: AskQuestionRequest):
-
-#     try:
-
-#         # ----------------------------------------------------
-#         # Import LangGraph only when a question is asked
-#         # ----------------------------------------------------
-    
-#         from app.graph.graph import build_graph
-
-#         # ----------------------------------------------------
-#         # Build / retrieve compiled graph
-#         # ----------------------------------------------------
-        
-#         graph = build_graph()
-
-#         # ----------------------------------------------------
-#         # Convert history into dictionaries
-#         # ----------------------------------------------------
-
-#         history = [
-#             {
-#                 "role": message.role,
-#                 "content": message.content,
-#             }
-#             for message in request.history
-#         ]
-
-#         # ----------------------------------------------------
-#         # Initial LangGraph state
-#         # ----------------------------------------------------
-
-#         initial_state = {
-#             "query": request.question,
-#             "history": history,
-#             "retry_count": 0,
-#         }
-
-#         # ----------------------------------------------------
-#         # Execute RAG pipeline
-#         # ----------------------------------------------------
-
-#         result = graph.invoke(initial_state)
-
-#         # ----------------------------------------------------
-#         # Get final answer
-#         # ----------------------------------------------------
-
-#         answer = result.get("answer", "")
-
-#         if not answer:
-
-#             answer = (
-#                 "I could not generate an answer "
-#                 "from the available documents."
-#             )
-
-#         return AskQuestionResponse(
-#             success=True,
-#             answer=answer,
-#         )
-
-#     except Exception as exc:
-
-#         print("========== RAG ERROR ==========")
-#         print(repr(exc))
-#         traceback.print_exc()
-#         print("================================")
-
-#         return AskQuestionResponse(
-#             success=False,
-#             answer="",
-#             error="Failed to process the question.",
-#             details=str(exc),
-#         )
-
-
-def ask_question(request):
+def ask_question(request: AskQuestionRequest):
 
     try:
-        print("========== CHAT REQUEST ==========")
-        print("1. Request received")
 
+        # ----------------------------------------------------
+        # Import LangGraph only when a question is asked
+        # ----------------------------------------------------
+    
         from app.graph.graph import build_graph
 
-        print("2. Imported build_graph")
-
+        # ----------------------------------------------------
+        # Build / retrieve compiled graph
+        # ----------------------------------------------------
+        
         graph = build_graph()
 
-        print("3. Graph built")
+        # ----------------------------------------------------
+        # Convert history into dictionaries
+        # ----------------------------------------------------
 
         history = [
             {
@@ -120,22 +49,34 @@ def ask_question(request):
             for message in request.history
         ]
 
+        # ----------------------------------------------------
+        # Initial LangGraph state
+        # ----------------------------------------------------
+
         initial_state = {
             "query": request.question,
             "history": history,
             "retry_count": 0,
         }
 
-        print("4. Invoking graph")
+        # ----------------------------------------------------
+        # Execute RAG pipeline
+        # ----------------------------------------------------
 
         result = graph.invoke(initial_state)
 
-        print("5. Graph completed")
+        # ----------------------------------------------------
+        # Get final answer
+        # ----------------------------------------------------
 
         answer = result.get("answer", "")
 
         if not answer:
-            answer = "I could not generate an answer from the available documents."
+
+            answer = (
+                "I could not generate an answer "
+                "from the available documents."
+            )
 
         return AskQuestionResponse(
             success=True,
@@ -143,6 +84,7 @@ def ask_question(request):
         )
 
     except Exception as exc:
+
         print("========== RAG ERROR ==========")
         print(repr(exc))
         traceback.print_exc()
@@ -154,3 +96,12 @@ def ask_question(request):
             error="Failed to process the question.",
             details=str(exc),
         )
+
+
+@router.get("/chat/test")
+def chat_test():
+    return {
+        "status": "ok",
+        "message": "Latest routes.py is running",
+        "request_model": "AskQuestionRequest",
+    }
